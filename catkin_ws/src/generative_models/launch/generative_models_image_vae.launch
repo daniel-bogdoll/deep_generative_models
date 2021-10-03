@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+    Generative models image launchfile with VAE
+-->
+<launch>
+    <arg name="model_weights_path" default="/disk/vanishing_data/fa401/mlp-online-pipeline-utils/model/vae_hyperprior_5_0.01_256_model_infer.pth.tar" doc="Path where the pretrained weights reside."/>
+    
+    <param name="param_model_weights_path" type="string" value="$(arg model_weights_path)"/> 
+
+    <group>     
+        <!-- Encoder node -->
+        <node pkg="generative_models" name="encoder_node" type="encoder_image_vae.py"></node>
+
+        <!-- Decoder node -->
+        <node pkg="generative_models" name="decoder_node" type="decoder_image_vae.py"></node>
+    </group>
+</launch>

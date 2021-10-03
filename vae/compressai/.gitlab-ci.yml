@@ -1,0 +1,126 @@
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - "$CI_PROJECT_DIR/.cache/pip"
+
+stages:
+  - build
+  - static-analysis
+  - test
+  - doc
+
+wheel:3.8:
+  image: python:3.8-buster
+  stage: build
+  before_script:
+    - pip install build
+  script:
+    - python -m build --wheel .
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+  tags:
+    - docker
+
+sdist:
+  image: python:3.8-buster
+  stage: build
+  before_script:
+    - pip install build
+  script:
+    - python -m build --sdist .
+  tags:
+    - docker
+
+wheel:3.9:
+  extends: wheel:3.8
+  image: python:3.9-buster
+
+wheel:3.7:
+  extends: wheel:3.8
+  image: python:3.7-buster
+
+wheel:3.6:
+  extends: wheel:3.8
+  image: python:3.6-buster
+
+flake8:
+  stage: static-analysis
+  image: pytorch/pytorch:1.8.1-cuda11.1-cudnn8-runtime
+  before_script:
+    - python --version
+    - pip install compressai --find-links=dist/
+    - pip install flake8 flake8-bugbear flake8-comprehensions
+  script:
+    - flake8 compressai tests examples docs
+  tags:
+    - docker
+
+black:
+  stage: static-analysis
+  image: python:3-buster
+  before_script:
+    - python --version
+    - pip install compressai --find-links=dist/
+    - pip install black
+  script:
+    - make check-black
+  tags:
+    - docker
+
+isort:
+  stage: static-analysis
+  image: python:3-buster
+  before_script:
+    - python --version
+    - pip install compressai --find-links=dist/
+    - pip install isort
+  script:
+    - make check-isort
+  tags:
+    - docker
+
+test:pytorch-1.5.1:
+  stage: test
+  image: pytorch/pytorch:1.5.1-cuda10.1-cudnn7-devel
+  before_script:
+    - python --version
+    - pip install -e .
+    - pip install click pytest pytest-cov
+  script:
+    - >
+      if [ "$CI_COMMIT_BRANCH" == "master" ]; then
+        pytest --cov=compressai -s tests
+      else
+        pytest --cov=compressai -m "not pretrained" -s tests
+      fi
+  tags:
+    - docker
+
+test:pytorch-1.6.0:
+  extends: test:pytorch-1.5.1
+  image: pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+
+test:pytorch-1.7.1:
+  extends: test:pytorch-1.5.1
+  image: pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+
+test:pytorch-1.8.1:
+  extends: test:pytorch-1.5.1
+  image: pytorch/pytorch:1.8.1-cuda11.1-cudnn8-devel
+
+doc:
+  stage: doc
+  image: pytorch/pytorch:1.8.1-cuda11.1-cudnn8-devel
+  before_script:
+    - python --version
+    - pip install -e .
+    - cd docs
+    - pip install -r requirements.txt
+  script:
+    - make html
+  tags:
+    - docker

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+    Generative models image launchfile with GAN
+-->
+<launch>
+    <!-- GAN -->
+    <arg name="model_weights_path" default="/disk/vanishing_data/fa401/models_moritz/kitti/kitti_compression_gan_2021_07_31_09_40/checkpoints/kitti_compression_gan_2021_07_31_09_40_epoch7_idx7484_2021_07_31_10:37.pt" doc="Path where the pretrained weights reside."/>
+    
+    <param name="param_model_weights_path" type="string" value="$(arg model_weights_path)"/> 
+
+    <group> 
+        <!-- Encoder node -->
+        <node pkg="generative_models" name="encoder_node" type="encoder_image_gan.py"></node>
+
+        <!-- Decoder node -->
+        <node pkg="generative_models" name="decoder_node" type="decoder_image_gan.py"></node>
+    </group>
+</launch>

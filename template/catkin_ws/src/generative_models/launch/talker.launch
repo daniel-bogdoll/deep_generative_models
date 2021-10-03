@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="output" default="screen" />
+
+  <!-- parameters for Carla -->
+  <arg name="host"          default="localhost"/> 
+  <arg name="port"          default="2000"/> 
+  <arg name="frequency"     default="50"/>
+  <arg name="fixed_delta_t" default="0.02"/>
+
+  <!-- start talker node -->
+  <node name="custom_talker" pkg="generative_models" type="talker.py" output="$(arg output)">
+    <param name="host"             value="$(arg host)"/>
+    <param name="port"             value="$(arg port)"/>
+    <param name="frequency"        value="$(arg frequency)"/>
+    <param name="fixed_delta_t"    value="$(arg fixed_delta_t)"/>
+  </node>  
+
+</launch>

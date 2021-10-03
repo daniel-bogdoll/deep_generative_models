@@ -1,0 +1,15 @@
+int32 id
+int32[] original_size
+int64[] hyperlatents_encoded
+int64[] latents_encoded
+int32[] hyperlatent_spatial_shape
+int32 batch_shape
+int32[] spatial_shape
+int32[] hyper_coding_shape
+int32[] latent_coding_shape
+float32 hyperlatent_bits
+float32 latent_bits
+float32 total_bits
+float32 hyperlatent_bpp
+float32 latent_bpp
+float32 total_bpp
