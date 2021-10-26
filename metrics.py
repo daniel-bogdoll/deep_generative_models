@@ -1,20 +1,16 @@
-import math
 import io
-import torch
-from torchvision import transforms
+import lpips
+import math
+import matplotlib.pyplot as plt
 import numpy as np
+import torch
 
 from PIL import Image
-import matplotlib.pyplot as plt
-
 from pytorch_msssim import ms_ssim
-
-import lpips
-
+from torchvision import transforms
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu' 
-
-net="alex" # for LPIPS 
+net = "alex" # for LPIPS 
 loss_fn = lpips.LPIPS(net=net)
 
 def compute_psnr(a, b, max_val=255.):
@@ -27,11 +23,9 @@ def compute_psnr(a, b, max_val=255.):
 
     Returns:
         [numpy.float64]: PSNR Value
-    """
-    
+    """    
     mse = torch.mean((a - b)**2).item()
     psnr = 20 * np.log10(max_val) - 10 * np.log10(mse)
-
     return psnr
 
 def compute_msssim(a, b):
@@ -44,13 +38,11 @@ def compute_msssim(a, b):
     Returns:
         [float]: MS_SSIM Value
     """
-
     ms_ssim_score = ms_ssim(a, b, data_range=1.).item()
-
     return ms_ssim_score
 
 def compute_lpips(a, b):
-    """Computation of LIPIS with https://github.com/richzhang/PerceptualSimilarity
+    """Computation of LPIPS with https://github.com/richzhang/PerceptualSimilarity
 
     Args:
         a ([Tensor]): Orignal image
@@ -58,10 +50,8 @@ def compute_lpips(a, b):
 
     Returns:
         [float]: LPIPS Value
-    """
-    
-    lpips_score = loss_fn.forward(a.cpu(), b.cpu())
-    
+    """    
+    lpips_score = loss_fn.forward(a.cpu(), b.cpu())    
     return lpips_score.item()
 
 def compute_mse(a, b):
@@ -74,7 +64,5 @@ def compute_mse(a, b):
     Returns:
         [float]: MSE Value
     """
-
-    mse = torch.mean((a - b)**2).item()
-    
+    mse = torch.mean((a - b)**2).item()    
     return mse

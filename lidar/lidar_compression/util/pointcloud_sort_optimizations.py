@@ -1,3 +1,6 @@
+"""We tried different approaches here and measured their performance. Keeping it for possible future optimizations. You may very well ignore this file.
+"""
+
 import numpy as np
 from math import floor
 
