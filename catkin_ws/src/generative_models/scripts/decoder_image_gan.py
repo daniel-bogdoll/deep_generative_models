@@ -31,9 +31,11 @@ class Decoder():
                                             data_class=EncodedImageGAN,
                                             callback=self.decoder_callback)        
         self.publisher = rospy.Publisher(name="GAN_decoded_imgs/", data_class=ImageMsg, queue_size=20)
+        
         # CUDA
-        # self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.device = 'cpu'
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        # self.device = 'cpu' # if GPU has not enough memory
+
         # GAN model
         rospy.logfatal("GAN LOADING!")
         self.gan = load_model(model_weights_path)
@@ -57,13 +59,12 @@ class Decoder():
         out_message.header = Header(in_encoded_img.id, rospy.Time.now(), "carla")
         out_message.height = out_img_original_size.height
         out_message.width = out_img_original_size.width
-        out_message.encoding = "rgb8" # [JJ] TODO verify
+        out_message.encoding = "rgb8" 
         out_message.is_bigendian = False
         out_message.step = 3 * out_img_original_size.width
         out_message.data = np.array(out_img_original_size).tobytes()
             
         self.publisher.publish(out_message)
-
 
         end.record()
         torch.cuda.synchronize()
@@ -73,20 +74,10 @@ class Decoder():
         timing_df = timing_df.append({'frameID': id, 'inference_time': elapsed_time, 'inference_time_decompress': elapsed_time_decompression, 'timestamp': timestamp}, ignore_index=True)
         
     def decode(self, in_encoded_img):
-        rospy.logfatal("DECODER!!")
 
         in_encoded_img.hyperlatents_encoded = np.asarray(list(in_encoded_img.hyperlatents_encoded)).astype(np.uint32)
         in_encoded_img.latents_encoded = np.asarray(list(in_encoded_img.latents_encoded)).astype(np.uint32)
         in_encoded_img.hyperlatent_spatial_shape = torch.empty(in_encoded_img.hyperlatent_spatial_shape[0], in_encoded_img.hyperlatent_spatial_shape[1]).size()
-        
-        # rospy.logfatal(in_encoded_img.hyperlatents_encoded)
-        # rospy.logfatal(type(in_encoded_img.hyperlatents_encoded[0]))
-        # rospy.logfatal(in_encoded_img.latents_encoded)
-        # rospy.logfatal(in_encoded_img.hyperlatent_spatial_shape)
-        # rospy.logfatal(in_encoded_img.batch_shape)
-        # rospy.logfatal(in_encoded_img.spatial_shape)
-        # rospy.logfatal(in_encoded_img.hyper_coding_shape)
-        # rospy.logfatal(in_encoded_img.latent_coding_shape)
 
         with torch.no_grad():
             output_decoder = decompress(self.gan, in_encoded_img)      

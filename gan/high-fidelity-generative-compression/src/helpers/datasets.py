@@ -189,9 +189,13 @@ class KITTI(BaseDataset):
     root : string
         Root directory of dataset.
 
+    References
+    ----------
+    [1] http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d
+
     """
 
-    def __init__(self, root=os.path.join(DIR, '/disk/ml/datasets/KITTI/object/data/training/image_2'), crop_size=256, normalize=False, **kwargs):
+    def __init__(self, root=os.path.join(DIR, 'PATH_TO_KITTI_TRAINING_DATA'), crop_size=256, normalize=False, **kwargs):
         super().__init__(root, [transforms.ToTensor()], **kwargs)
 
         self.imgs = glob.glob(os.path.join(root, '*.jpg'))
@@ -226,7 +230,7 @@ class KITTI(BaseDataset):
         ------
         sample : torch.Tensor
             Tensor in [0.,1.] of shape `img_size`.
-
+        
         """
         img_path = self.imgs[idx]
         filesize = os.path.getsize(img_path)
@@ -266,8 +270,12 @@ class WAYMO(BaseDataset):
     root : string
         Root directory of dataset.
 
+    References
+    ----------
+    [2] https://waymo.com/open/
+
     """
-    def __init__(self, root=os.path.join(DIR, '/disk/vanishing_data/fa401/waymo_2D_training'), crop_size=256, normalize=False, **kwargs):
+    def __init__(self, root=os.path.join(DIR, 'PATH_TO_WAYMO_TRAINING_DATA'), crop_size=256, normalize=False, **kwargs):
         super().__init__(root, [transforms.ToTensor()], **kwargs)
 
         self.imgs = glob.glob(os.path.join(root, '*.jpg'))
@@ -346,7 +354,7 @@ class OpenImages(BaseDataset):
 
     References
     ----------
-    [1] https://storage.googleapis.com/openimages/web/factsfigures.html
+    [3] https://storage.googleapis.com/openimages/web/factsfigures.html
 
     """
     files = {"train": "train", "test": "test", "val": "validation"}
