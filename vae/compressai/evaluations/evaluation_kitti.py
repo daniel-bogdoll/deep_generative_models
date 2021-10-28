@@ -1,3 +1,8 @@
+"""Evaluation of VAE compression for KITTI dataset. Saves results in csv files. 
+
+    Use hardcoded parameters since argparse is not useful here.
+"""
+
 import torch
 from torchvision import transforms
 from PIL import Image

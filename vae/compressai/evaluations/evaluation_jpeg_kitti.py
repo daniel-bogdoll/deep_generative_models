@@ -1,3 +1,11 @@
+"""
+Evaluation of JPEG compression for KITTI dataset. Saves results in csv files. 
+usage: evaluation_jpeg_kitti.py [-h] --image_folder_path IMAGE_FOLDER_PATH
+                                [--input_shape INPUT_SHAPE]
+                                [--save_images SAVE_IMAGES]
+                                [--save_images_folder SAVE_IMAGES_FOLDER]
+"""
+
 import torch
 from torchvision import transforms
 from PIL import Image
@@ -6,14 +14,28 @@ from metrics import *
 import pandas as pd
 import os
 from evaluation_functions import *
+import argparse
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+# Argparser
+parser = argparse.ArgumentParser(description='Evaluation of JPEG compression for KITTI dataset. Saves results in csv files.')
+parser.add_argument('--image_folder_path', type=str, required=True,
+                    help='Folder with images to encode (KITTI folder)')
+parser.add_argument('--input_shape', type=tuple, default=(256,256),
+                    help='Shape for images before encoding.')
+parser.add_argument('--save_images', type=str, default=False,
+                    help='Save encoded images.')
+parser.add_argument('--save_images_folder', type=str, default="./encoded images",
+                    help='Folder for encoded images if save_images flag is set.')
+
+args = parser.parse_args()
+
 # Parameters
-image_folder_path = #..
-input_shape = (256,256)
-save_images = True
-save_images_folder = #..
+image_folder_path = args.image_folder_path
+input_shape = args.input_shape
+save_images = args.save_images
+save_images_folder = args.save_images_folder
 compression_method = "JPEG"
 quality_levels = [0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1] 
 

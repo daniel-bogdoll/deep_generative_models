@@ -1,3 +1,8 @@
+"""Evaluation of VAE point cloud compression for KITTI dataset. Saves results in csv files. 
+
+    Use hardcoded parameters since argparse is not useful here.
+"""
+
 import numpy as np
 from torchvision import transforms
 from compressai.zoo import bmshj2018_hyperprior
