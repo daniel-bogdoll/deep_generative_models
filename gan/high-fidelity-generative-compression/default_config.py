@@ -28,8 +28,8 @@ class DatasetPaths(object):
     OPENIMAGES = 'data/openimages'
     CITYSCAPES = ''
     JETS = ''
-    KITTI = '/disk/ml/datasets/KITTI/object/data/training/image_2'
-    WAYMO = '/disk/vanishing_data/fa401/waymo_2D_training'
+    KITTI = 'PATH_TO_KITTI_TRAINING_DATA'
+    WAYMO = 'PATH_TO_WAYMO_TRAINING_DATA'
 
 
 class directories(object):

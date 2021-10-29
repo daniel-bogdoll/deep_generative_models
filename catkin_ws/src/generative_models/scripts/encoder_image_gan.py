@@ -30,9 +30,11 @@ class Encoder():
                                             callback=self.encoder_callback)
         # GAN
         self.publisher = rospy.Publisher(name="GAN_encoded_imgs/", data_class=EncodedImageGAN, queue_size=10)
+        
         # CUDA 
-        # self.device = 'cpu' # To run on a single workstation together with Carla
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        # self.device = 'cpu' # if GPU has not enough memory
+        
         # GAN model
         self.gan = load_model(model_weights_path)
 
@@ -82,8 +84,8 @@ class Encoder():
     def encode(self, img_tensor):
         with torch.no_grad():
             # [JJ] type(output_encoder) = dict
-            # output_encoder = self.net.compress(img_tensor)
             output_encoder = compress(self.gan, img_tensor)
+            
         return output_encoder
 
 def write_timing():

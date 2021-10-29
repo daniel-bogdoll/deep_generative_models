@@ -2,12 +2,12 @@
 
 Implementation of the Paper [High-Fidelity Generative Image Compression](https://arxiv.org/abs/2006.09965)* by Fabian Mentzer, George Toderici, Michael Tschannen, and Eirikur Agustsson.
 
-The repository was adapted to our own needs from the [original publication](https://hific.github.io/).
+This [reimplementation repository](https://github.com/Justin-Tan/high-fidelity-generative-compression) was adapted to our own needs from the [original publication](https://hific.github.io/).
 
 ## Training
 Instructions:
-1. If needed, setup new dataset in `./src/helpers/datasets.py` as new BaseDataset and add it to DATASETS_DICT (existing Datasets = ["openimages", "cityscapes",  "jetimages", "kitti", "waymo"]). Adjust the paths for KITTI and Waymo images.
-2. Check in default_config.py file for general settings and declare in args which Dataset should be selected. Additionally correct path to dataset must be set in DatasetPaths. 
+1. Link the correct path of training data, e.g. KITTI in `default_config.py` and in `./src/helpers/datasets.py` (Currently named "PATH_TO_KITTI_TRAINING_DATA")
+2. Check in default_config.py file for general settings and and declare in args which Dataset should be selected. 
 3. Train initial autoencoding model
     - Example:`python train.py --model_type compression --regime high --gpu 0 --n_steps 1e6`
 4. Train using full generator-discriminator loss with a warmstart on the previous Autoencoder
@@ -17,6 +17,9 @@ Remarks:
 - Training chackpoints will be saved in ``experiments/dataset_compression_gan_timestamp/checkpoints/`` (e.g. ``./experiments/kitti_compression_gan_2021_06_03_10_30/checkpoints/``) 
 - While training there will be information about the training logged in ``experiments/dataset_compression_gan_timestamp/tensorboard/`` which can be checked in tensorboard - example:
 ```tensorboard --logdir ./experiments/waymo_comession_2021_07_12_19_59/tensorboard/ --port 2401```
+
+### Setup new data
+Setup new dataset in `./src/helpers/datasets.py` as new BaseDataset and add it to DATASETS_DICT (existing Datasets = ["openimages", "cityscapes",  "jetimages", "kitti", "waymo"]). Adjust the correct path for the images in the __init__ method.
 
 ## Inference
 - Compression: `-i` specifies the folder where the images that should be compressed are. A Folder with reconstructions will be automatically created.

@@ -3,7 +3,7 @@
     Generative models lidar launchfile
 -->
 <launch>
-    <arg name="model_weights_path" default="/disk/vanishing_data/fa401/mlp-online-pipeline-utils/model/vae_hyperprior_5_0.01_256_model_infer.pth.tar" doc="Path where the pretrained weights reside."/>
+    <arg name="model_weights_path" default="VAE_COMPRESSION_CHECKPOINT" doc="Path where the pretrained weights reside."/>
     
     <param name="param_model_weights_path" type="string" value="$(arg model_weights_path)"/>
     <rosparam param="pc_height">64</rosparam>

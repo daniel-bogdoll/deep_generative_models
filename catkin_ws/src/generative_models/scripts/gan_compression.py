@@ -6,19 +6,23 @@ from high_fidelity_generative_compression.gan_compression.default_config import 
 
 def compress(model, data):
     """
-    Compress Input Image
+    Compress input image to latent representation
     """
 
     # Perform entropy coding
     compressed_output = model.compress(data)
     
+
     return compressed_output
 
 def decompress(model, data):
-    
+    """
+    Decompress latent representation to reconstructed image
+    """
     # Perform entropy coding
     compressed_output = model.decompress(data)
     
+
     return compressed_output
 
 def load_model(ckpt_path):
@@ -26,11 +30,13 @@ def load_model(ckpt_path):
     Load the GAN model
     """
     
-    # Load model
+    # Get device
     device = utils.get_device()
-    logger = utils.logger_setup(logpath="/disk/no_backup/fa751/high-fidelity-generative-compression/data/originals/logs", filepath="/disk/no_backup/fa751/high-fidelity-generative-compression/data/originals/logs")
-    # logger = utils.logger_setup(logpath="/disk/vanishing_data/fa401/logs/logfile", filepath="/disk/vanishing_data/fa401/logs/logfile")
     
+    # Initialize logger
+    logger = utils.logger_setup(logpath="PATH_TO_LOG", filepath="PATH_TO_LOG")
+    
+    # Load model
     loaded_args, model, _ = utils.load_model(ckpt_path, logger, device, model_mode=ModelModes.EVALUATION,
         current_args_d=None, prediction=True, strict=False)
     

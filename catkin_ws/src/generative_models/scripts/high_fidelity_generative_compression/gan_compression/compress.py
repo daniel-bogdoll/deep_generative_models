@@ -209,7 +209,6 @@ def compress_and_decompress(args):
     logger.info('Rate: {:.3f} Images / s:'.format(float(N) / delta_t))
 
 
-# RIP
 def load_model(ckpt_path):
     """
     Load the GAN model
@@ -217,7 +216,7 @@ def load_model(ckpt_path):
     
     # Load model
     device = utils.get_device()
-    logger = utils.logger_setup(logpath="/disk/vanishing_data/fa401/logs/logfile", filepath="/disk/vanishing_data/fa401/logs/logfile")
+    logger = utils.logger_setup(logpath="PATH_TO_LOG", filepath="PATH_TO_LOG")
     loaded_args, model, _ = utils.load_model(ckpt_path, logger, device, model_mode=ModelModes.EVALUATION,
         current_args_d=None, prediction=True, strict=False)
     
@@ -234,14 +233,9 @@ def compress(model, data):
     Compress Input Image
     """
 
-    # Dataloader if needed
-    # eval_loader = datasets.get_dataloaders('evaluation', root=args.image_dir, batch_size=args.batch_size,
-    #                                        logger=logger, shuffle=False, normalize=args.normalize_input_image)
-
     # Perform entropy coding
     compressed_output = model.compress(data)
   
-# ENDE
 
 def main(**kwargs):
 
