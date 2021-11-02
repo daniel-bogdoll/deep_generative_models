@@ -1,0 +1,3 @@
+[submodule "vae/third_party/compressai"]
+	path = vae/third_party/compressai
+	url = https://github.com/InterDigitalInc/CompressAI.git
