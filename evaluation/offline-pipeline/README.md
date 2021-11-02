@@ -1,4 +1,4 @@
-# Evaluations
+# Offline Pipeline Evaluation
 **Please follow installation instructions in .``/vae/README.md`` first!**
 
 This folder contains various scripts and notebooks for VAE, GAN and JPEG comparison.
