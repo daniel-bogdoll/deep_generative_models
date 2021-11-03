@@ -1,5 +1,1 @@
-*
 !.gitignore
-!train.py
-!train_pointclouds.py
-!datasets/
