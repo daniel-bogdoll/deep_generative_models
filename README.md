@@ -5,7 +5,7 @@ Repository of the paper **Compressing Sensor Data for Remote Assistance of Auton
 
 ## Online Pipeline
 
-The left side of the videos shows the ground truth data from CARLA. On the right you see the VAE based reconstructions. Videos are accelerated by a factor of 8.
+The left side of the videos shows the ground truth data from CARLA. On the right you see the VAE based reconstructions. Videos are accelerated.
 
 https://user-images.githubusercontent.com/19552411/135649380-de1865eb-b1d5-4852-ad9f-807104dca5a9.mp4
 
