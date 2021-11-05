@@ -45,8 +45,8 @@ class Decoder():
         self.net.load_state_dict(torch.load(model_weights_path))
         self.net.eval()
         self.net.to(self.device)
-        # print(f'Parameters: {sum(p.numel() for p in self.net.parameters())}')
-
+        self.net.update()
+        
     def decoder_callback(self, in_encoded_cloud):
         global timing_df
         start = torch.cuda.Event(enable_timing=True)
@@ -79,7 +79,6 @@ class Decoder():
     def decode(self, strings, strings_shape):
         with torch.no_grad():
             output_decoder = self.net.decompress(strings, strings_shape)        
-        output_decoder['x_hat'].clamp_(0, 1)
         output_tensor = np.asarray(output_decoder['x_hat'].squeeze().cpu())
         # Gotta swap axes
         swapped = np.swapaxes(np.swapaxes(output_tensor, 0, 2), 0,1)        
@@ -87,9 +86,9 @@ class Decoder():
 
 def write_timing():
     # global timing_df # maybe needed, try it out!    
-    timing_df.to_csv("/fzi/ids/fa751/lidar/decoder.csv")
+    # timing_df.to_csv("SAVING_PATH")
 
 if __name__ == "__main__":
     listener = Decoder()    
-    rospy.on_shutdown(write_timing)
+    # rospy.on_shutdown(write_timing)
     rospy.spin()
