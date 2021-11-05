@@ -37,7 +37,6 @@ class Decoder():
         self.net.load_state_dict(torch.load(model_weights_path))
         self.net.eval()
         self.net.to(self.device)
-        # print(f'Parameters: {sum(p.numel() for p in self.net.parameters())}')
 
     def decoder_callback(self, in_encoded_img):
         global timing_df
@@ -90,9 +89,9 @@ class Decoder():
 
 def write_timing():
     # global timing_df # maybe needed, try it out!    
-    timing_df.to_csv("/fzi/ids/fa751/image_vae/decoder.csv")
+    # timing_df.to_csv("SAVING_PATH")
 
 if __name__ == "__main__":
     listener = Decoder()    
-    rospy.on_shutdown(write_timing)
+    # rospy.on_shutdown(write_timing)
     rospy.spin()
