@@ -53,3 +53,9 @@ The following steps should be performed via remote desktop, because Carla will s
 	1. Launch either the image compression, or the lidar compression: `roslaunch generative_models generative_models_image_gan.launch`
         - Alternative launchfiles: `generative_models_image_vae.launch`, `generative_models_lidar.launch`
         - Note: When using the GAN launch file: don't get confused by error messages ("... cannot find GAN..."). As the loading of the GAN model takes some time this is normal. After a couple of moments the model is successfully loaded and the error disappears.
+
+## Important Note when Running the Lidar Online Pipeline
+When using the VAE to compress/decompress the preprocessed Lidar pointclouds a slight adjustement in the VAE decompress method is necessary to view the real pointclouds:
+1. Go to `deep_generative_models/vae/third_party/CompressAI/compressai/models/priors.py`
+2. Remove the clamp() from line 305 in the decompress method of ScaleHyperprior from: So `x_hat = self.g_s(y_hat).clamp_(0, 1)` **to** `x_hat = self.g_s(y_hat)`. Otherwise the decompressed Lidar Output will be a cube.
+3. Reinstall the compressAi package by `cd _compressAI_Path` and run `pip install .`
