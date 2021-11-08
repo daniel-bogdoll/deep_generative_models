@@ -7,7 +7,7 @@
     
     <param name="param_model_weights_path" type="string" value="$(arg model_weights_path)"/>
     <rosparam param="pc_height">64</rosparam>
-    <rosparam param="pc_width">512</rosparam>
+    <rosparam param="pc_width">128</rosparam>
 
     <group>
         <!-- Preprocessor node -->

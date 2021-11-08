@@ -90,9 +90,9 @@ class Encoder():
 
 def write_timing():
     # global timing_df # maybe needed, try it out!    
-    timing_df.to_csv("/fzi/ids/fa751/image_gan/encoder.csv")
+    # timing_df.to_csv("SAVING_PATH")
 
 if __name__ == "__main__":
     listener = Encoder()    
-    rospy.on_shutdown(write_timing)
+    # rospy.on_shutdown(write_timing)
     rospy.spin()

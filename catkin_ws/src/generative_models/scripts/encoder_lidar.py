@@ -46,6 +46,7 @@ class Encoder():
         self.net.load_state_dict(torch.load(model_weights_path))
         self.net.eval()
         self.net.to(self.device)
+        self.net.update()
         rospy.logfatal('Parameters: {}'.format(sum(p.numel() for p in self.net.parameters())))
 
     def encoder_callback(self, in_cloud):
@@ -103,9 +104,9 @@ class Encoder():
 
 def write_timing():
     # global timing_df # maybe needed, try it out!    
-    timing_df.to_csv("/fzi/ids/fa751/lidar/encoder.csv")
+    # timing_df.to_csv("SAVING_PATH")
 
 if __name__ == "__main__":
     listener = Encoder()    
-    rospy.on_shutdown(write_timing)
+    # rospy.on_shutdown(write_timing)
     rospy.spin()

@@ -46,7 +46,7 @@ class LidarPreprocessor():
         start.record()
         gen_raw_points = pc2.read_points(in_cloud)   
         arr_raw_points = np.array(list(gen_raw_points))[:,:3]
-        # rospy.logfatal("arr_raw_points.shape: {}".format(arr_raw_points.shape))
+
         start_preprocess.record()
         sorted_cloud = sort_points(add_spherical_coordinates(remove_distant_and_close_points(arr_raw_points)),
                                                              num_cols=self.pc_width,
@@ -68,9 +68,9 @@ class LidarPreprocessor():
 
 def write_timing():
     global timing_df # maybe needed, try it out!    
-    timing_df.to_csv("/fzi/ids/fa751/lidar/preprocessor.csv")
+    # timing_df.to_csv("SAVING_PATH")
 
 if __name__ == "__main__":
     listener = LidarPreprocessor()    
-    rospy.on_shutdown(write_timing)
+    # rospy.on_shutdown(write_timing)
     rospy.spin()
