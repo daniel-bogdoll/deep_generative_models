@@ -20,8 +20,8 @@ Example command for training with images:
 ```bash
 python3 trainings/train.py \
     -m bmshj2018-hyperprior \
-    --train /disk/ml/datasets/KITTI/object/data/training/image_2 \
-    --test /disk/ml/datasets/KITTI/object/data/testing/image_2 \
+    --train PATH_FOR_TRAIN_IMAGES \
+    --test PATH_FOR_TEST_IMAGES \
     --epochs 100 -lr 1e-4 \
     --batch-size 16 \
     --cuda \
@@ -36,8 +36,8 @@ Example command for training with point clouds:
 ```bash
 python3 trainings/train_pointclouds.py \
     -m bmshj2018-hyperprior \
-    --train /disk/vanishing_data/fa401/mlp_kitti_clouds/test \
-    --test /disk/vanishing_data/fa401/mlp_kitti_clouds/test  \
+    --train PATH_FOR_TRAIN_POINT_CLOUDS \
+    --test PATH_FOR_TEST_POINT_CLOUDS  \
     --epochs 100 \
     -lr 1e-4 \
     --batch-size 16 \
@@ -46,7 +46,7 @@ python3 trainings/train_pointclouds.py \
     --save \
     --name DEFINE_A_NAME \
     --quality 5 \
-    --lambda 0.001 \
+    --lambda 0.01 \
     --cloud_arg kitti_cloud_2d
 ```
 See `python3 trainings/train_pointclouds.py --h` for help.
@@ -57,4 +57,4 @@ python3 -m compressai.utils.update_model --architecture bmshj2018-hyperprior PAT
 ```` 
 
 ## Evaluation
-Evaluation was done with several scripts in `./evaluations`. Note that code contains some hardcoded folder and image paths!
+Evaluation was done with several scripts in `evaluation/offline-pipeline` folder. Note that code contains some hardcoded folder and image paths!
