@@ -87,8 +87,6 @@ class PointCloudFolder(Dataset):
             data = np.load(file)
 
         cloud_2d = data[self.cloud_arg][:,:,0:3]
-        cloud_2d = np.resize(cloud_2d, (64,512,3))
-
 
         if self.transform:
             return self.transform(cloud_2d)
