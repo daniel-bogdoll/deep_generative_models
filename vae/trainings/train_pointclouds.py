@@ -260,13 +260,6 @@ def parse_args(argv):
         default=1e-3,
         help="Auxiliary loss learning rate (default: %(default)s)",
     )
-    parser.add_argument(
-        "--patch-size",
-        type=int,
-        nargs=2,
-        default=(64, 512),
-        help="Size of the patches to be cropped (default: %(default)s)",
-    )
     parser.add_argument("--cuda", action="store_true", help="Use cuda")
     parser.add_argument(
         "--save", action="store_true", default=True, help="Save model to disk"
