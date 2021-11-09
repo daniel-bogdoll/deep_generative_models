@@ -9,7 +9,7 @@ The left side of the videos shows the ground truth data from CARLA. On the right
 
 https://user-images.githubusercontent.com/19552411/135649380-de1865eb-b1d5-4852-ad9f-807104dca5a9.mp4
 
-https://user-images.githubusercontent.com/19552411/140543226-29eadaf3-5ae8-445b-919c-cf5b4125d281.mp4
+https://user-images.githubusercontent.com/19552411/140888871-8678ced9-50f2-4da6-80ed-942d382bb239.mp4
 
 ## Repository Structure
 
