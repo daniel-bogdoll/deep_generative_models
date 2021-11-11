@@ -24,3 +24,15 @@ See the specific folders for additional information.
 ├── paper-graphics  # Code that generates some of our graphics
 └── vae             # The VAE we use
 ```
+
+## Citation
+If you find this code useful for your research, please cite our [paper](https://arxiv.org/abs/2111.03201):
+```
+@article{Bogdoll_Compressing_2021_NeurIPS,
+    author    = {Bogdoll, Daniel and Jestram, Johannes and Rauch, Jonas and Scheib, Christin and Wittig, Moritz and Z\"{o}llner, J. Marius},
+    title     = {{Compressing Sensor Data for Remote Assistance of Autonomous Vehicles using Deep Generative Models}},
+    journal   = {NeurIPS Conference on Neural Information Processing Systems Workshop on Machine Learning for Autonomous Driving (ML4AD)},
+    year      = {2021},
+}
+
+```
