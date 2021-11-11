@@ -26,7 +26,7 @@ See the specific folders for additional information.
 ```
 
 ## Citation
-If you find this code useful for your research, please cite our [paper](https://arxiv.org/abs/2111.03201):
+If you find this code useful for your research, please cite our paper:
 ```
 @article{Bogdoll_Compressing_2021_NeurIPS,
     author    = {Bogdoll, Daniel and Jestram, Johannes and Rauch, Jonas and Scheib, Christin and Wittig, Moritz and Z\"{o}llner, J. Marius},
@@ -34,5 +34,4 @@ If you find this code useful for your research, please cite our [paper](https://
     journal   = {NeurIPS Conference on Neural Information Processing Systems Workshop on Machine Learning for Autonomous Driving (ML4AD)},
     year      = {2021},
 }
-
 ```
