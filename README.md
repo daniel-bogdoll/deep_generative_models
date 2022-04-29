@@ -35,3 +35,7 @@ If you find this code useful for your research, please cite our paper:
     year      = {2021},
 }
 ```
+
+## Acknowledgment
+This work results partly from the KIGLIS project supported by the German Federal Ministry of
+Education and Research (BMBF), grant number 16KIS1231.
