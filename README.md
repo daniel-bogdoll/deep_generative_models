@@ -28,11 +28,11 @@ See the specific folders for additional information.
 ## Citation
 If you find this code useful for your research, please cite our paper:
 ```
-@article{Bogdoll_Compressing_2021_NeurIPS,
-    author    = {Bogdoll, Daniel and Jestram, Johannes and Rauch, Jonas and Scheib, Christin and Wittig, Moritz and Z\"{o}llner, J. Marius},
-    title     = {{Compressing Sensor Data for Remote Assistance of Autonomous Vehicles using Deep Generative Models}},
-    journal   = {NeurIPS Conference on Neural Information Processing Systems Workshop on Machine Learning for Autonomous Driving (ML4AD)},
-    year      = {2021},
+@article{Bogdoll_Multimodal_2022_arXiv,
+  author    = {Bogdoll, Daniel and Eisen, Enrico and Scheib, Christin and Nitsche, Maximilian and Z\"{o}llner, J. Marius},
+  title     = {{Multimodal Detection of Unknown Objects on Roads for Autonomous Driving}}, 
+  journal   = {arXiv preprint:2205.01414},
+  year      = {2022}
 }
 ```
 
