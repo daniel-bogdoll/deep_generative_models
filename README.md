@@ -1,6 +1,6 @@
 # Compressing Sensor Data for Remote Assistance of Autonomous Vehicles using Deep Generative Models
 
-Repository of the paper **[Compressing Sensor Data for Remote Assistance of Autonomous Vehicles using Deep Generative Models](https://arxiv.org/abs/2111.03201)** at [ML4AD@NeurIPS 2021](https://ml4ad.github.io/).
+Repository of the paper **[Compressing Sensor Data for Remote Assistance of Autonomous Vehicles using Deep Generative Models](https://arxiv.org/abs/2111.03201)**, accepted at [ML4AD@NeurIPS 2021](https://ml4ad.github.io/).
 
 ## Online Pipeline
 
