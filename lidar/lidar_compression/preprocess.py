@@ -114,7 +114,7 @@ def preprocess_write_waymo(in_dir:str, out_dir:str, ratio_used:float=1.0)->None:
     Parameters
     ----------
     in_dir : str
-        Source of the KITTI binaries
+        Source of the Waymo tfrecords
     out_dir : str
         Target path for storing the converted npz files
     ratio_used : float
