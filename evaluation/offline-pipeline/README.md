@@ -7,7 +7,7 @@ This includes:
 - Object detection evaluation
 - Point cloud KITTI evaluation
 
-For each there are to files available: one Python script and one Jupyter notebook. The Python script can be executed and tests a preset dataset (e.g. KITTI) with given (trained) models. The results will then be saved in corresponding folders as .csv files. The .csv files can then be imported and its data evaluated using the respective Jupyter notebooks.
+For each evaluation there are two files available: one Python script and one Jupyter notebook. The Python script can be executed and tests a preset dataset (e.g. KITTI) with given (trained) models. The results will then be saved in corresponding folders as .csv files. The .csv files can then be imported and its data evaluated using the respective Jupyter notebooks.
 
 Apart from that, some experiments can be done using 
 :
