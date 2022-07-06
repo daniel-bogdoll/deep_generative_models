@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-#   This node transforms the velodyne pointclouds from their own frame to base_link frame
-#   It republishes the transformed PCs to rosbag2kitti/<sensorname>
+#   This node transforms the Carla pointclouds based on "Deep Generative Modeling of LiDAR Data" by Caccia et al. and our paper.
+#   It republishes the transformed PCs to the topic "preprocessed_lidar/"
 
 import numpy as np
 import pandas as pd
@@ -64,7 +64,13 @@ class LidarPreprocessor():
         elapsed_time = start.elapsed_time(end) # milliseconds
         elapsed_time_preprocess = start_preprocess.elapsed_time(end_preprocess) # milliseconds
         timestamp = datetime.now().strftime("%H:%M:%S.%f")
-        timing_df = timing_df.append({'frameID': id, 'inference_time': elapsed_time, 'inference_time_preprocess': elapsed_time_preprocess, 'timestamp': timestamp}, ignore_index=True)
+        timing_df = timing_df.append({
+                                        'frameID': id,
+                                        'inference_time': elapsed_time,
+                                        'inference_time_preprocess': elapsed_time_preprocess,
+                                        'timestamp': timestamp
+                                      },
+                                      ignore_index=True)
 
 def write_timing():
     global timing_df # maybe needed, try it out!    
