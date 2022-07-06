@@ -20,13 +20,19 @@ def add_spherical_coordinates(cartesian_cloud:np.ndarray)->np.ndarray:
     x = cartesian_cloud[:,0]
     y = cartesian_cloud[:,1]
     z = cartesian_cloud[:,2]
-    r = np.sqrt(x**2 + y**2 + z**2).reshape((cartesian_cloud.shape[0], 1))
+    r = (np.sqrt(x**2 + y**2 + z**2)
+           .reshape((cartesian_cloud.shape[0], 1)))
     # Same as the "theta = arctan2(...)" formula
     # We need the where-condition in divide to catch cases where r=0 -> arccos(x) should be 0 there -> 0 = arccos(1)
-    theta = np.arccos(np.divide(z, r[:,0], out=np.ones_like(z, dtype=np.float), where=r[:,0]!=0)).reshape((cartesian_cloud.shape[0], 1))
-    phi = np.arctan2(y,x).reshape((cartesian_cloud.shape[0], 1))
+    theta = (np.arccos(np.divide(z,
+                                 r[:,0],
+                                 out=np.ones_like(z, dtype=np.float),
+                                 where=r[:,0]!=0))
+               .reshape((cartesian_cloud.shape[0], 1)))
+    phi = (np.arctan2(y,x)
+             .reshape((cartesian_cloud.shape[0], 1)))
     # Scale phi from [-pi,pi] to [0,2pi], which is needed for sorting it later
-    phi[phi<0] = phi[phi<0] + 2*pi
+    phi[phi < 0] = phi[phi < 0] + 2*pi
     return np.concatenate((cartesian_cloud, r, theta, phi), axis=1)
 
 def remove_distant_and_close_points(cloud:np.ndarray, min_percentile:int=1, max_percentile:int=99)->np.ndarray:
@@ -60,12 +66,15 @@ def remove_distant_and_close_points(cloud:np.ndarray, min_percentile:int=1, max_
     # condition_z = np.any([cloud[:,2] < min_z, cloud[:,2] > max_z], axis=0).reshape((cloud.shape[0], 1))
     # condition = np.concatenate([condition_x, condition_y, condition_z], axis=1)
     # TODO Try this
-    condition_xyz = np.any([cloud[:,0] < min_x,
-                           cloud[:,0] > max_x,
-                           cloud[:,1] < min_y,
-                           cloud[:,1] > max_y,
-                           cloud[:,2] < min_z,
-                           cloud[:,2] > max_z], axis=0).reshape((cloud.shape[0], 1))
+    condition_xyz = (np.any([cloud[:,0] < min_x,
+                             cloud[:,0] > max_x,
+                             cloud[:,1] < min_y,
+                             cloud[:,1] > max_y,
+                             cloud[:,2] < min_z,
+                             cloud[:,2] > max_z
+                            ],
+                            axis=0)
+                       .reshape((cloud.shape[0], 1)))
     condition = np.concatenate([condition_xyz, condition_xyz, condition_xyz], axis=1)
 
 
